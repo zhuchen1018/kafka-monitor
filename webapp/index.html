@@ -11,66 +11,68 @@
     <script type="text/javascript" src="js/json2.js"></script>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.tabs.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
     $(function () {
 	    if ($.fn.tabs) {
 		    $('#tabs').tabs($.fn.tabs.tabProps);
 	    }
 	});
+
     </script>
 
     <style type="text/css">
         @import "css/jquery.tabs.css";
 
         text {
-            font-family: "Times New Roman";
-            font-size: 20px;
-            text-align: center;
+        font-family: "Times New Roman";
+        font-size: 20px;
+        text-align: center;
         }
 
         #tab1 , #tab2 , #tab3 {
-            clear: both;
-            border: 1px solid #3c8243;
-            border-radius: 4px;
+        clear: both;
+        border: 1px solid #3c8243;
+        border-radius: 4px;
         }
 
         .tabs-nav a , .tabs-nav a span {
-            background: url(fig/tab-green.png) no-repeat;
-            font-size: 20px;
+        background: url(fig/tab-green.png) no-repeat;
+        font-size: 20px;
         }
 
         .tabs-nav a {
-            background-position: 100% -100px;
+        background-position: 100% -100px;
         }
 
         textarea{
-            font-size: 20px;
-            resize: none;
-            border: 2px solid;
-            padding: 10px;
+        font-size: 20px;
+        resize: none;
+        border: 2px solid;
+        padding: 10px;
         }
 
         table{
-            font-size: 20px;
-            margin-left: auto;
-            margin-right: auto;
+        font-size: 20px;
+        margin-left: auto;
+        margin-right: auto;
         }
 
         h2{
-            text-align: center;
+        text-align: center;
         }
 
         #statistics {
-            margin-left: 60px;
-            width: 1360px;
-            height: 200px;
-            padding-top: 5px;
+        margin-left: 60px;
+        width: 1360px;
+        height: 200px;
+        padding-top: 5px;
         }
 
         input {
-            margin-bottom: 10px; padding: 3px 3px; width: 280px;
-            border: 2px solid #CCCCCC;
+        margin-bottom: 10px; padding: 3px 3px; width: 280px;
+        border: 2px solid #CCCCCC;
         }
 
 
@@ -91,13 +93,13 @@
 
     <div id="tab1">
         <div style="margin-left:30px">
-            <tr> <h3>Search <input type="text" id="search1" placeholder="Type to search"></h3></tr>
+            <tr><h3>Search <input type="text" id="search1" placeholder="Type to search"></h3></tr>
             <table id="table" width="100%" align="center"></table>
         </div>
     </div>
 
     <div id="tab2">
-        <table id="dvTable" class = "display" cellspacing="0" width="100%" align = "center"></table>
+        <table id="dvTable" class="display" cellspacing="0" width="100%" align="center"></table>
     </div>
 </div>
 </body>
@@ -291,6 +293,7 @@ function createCanvas(name, cells) {
   setInterval(function () {
     GenerateTable(monitoredMbeans);
   }, pollIntervalMs);
+
 
 
 </script>
