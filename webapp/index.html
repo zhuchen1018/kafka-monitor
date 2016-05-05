@@ -22,61 +22,61 @@
 
     </script>
 
-    <style type="text/css">
-        @import "css/jquery.tabs.css";
+<style type="text/css">
+    @import "css/jquery.tabs.css";
 
-        text {
-        font-family: "Times New Roman";
-        font-size: 20px;
-        text-align: center;
-        }
+    text {
+    font-family: "Times New Roman";
+    font-size: 20px;
+    text-align: center;
+    }
 
-        #tab1 , #tab2 , #tab3 {
-        clear: both;
-        border: 1px solid #3c8243;
-        border-radius: 4px;
-        }
+    #tab1 , #tab2 , #tab3 {
+    clear: both;
+    border: 1px solid #3c8243;
+    border-radius: 4px;
+    }
 
-        .tabs-nav a , .tabs-nav a span {
-        background: url(fig/tab-green.png) no-repeat;
-        font-size: 20px;
-        }
+    .tabs-nav a , .tabs-nav a span {
+    background: url(fig/tab-green.png) no-repeat;
+    font-size: 20px;
+    }
 
-        .tabs-nav a {
-        background-position: 100% -100px;
-        }
+    .tabs-nav a {
+    background-position: 100% -100px;
+    }
 
-        textarea{
-        font-size: 20px;
-        resize: none;
-        border: 2px solid;
-        padding: 10px;
-        }
+    textarea{
+    font-size: 20px;
+    resize: none;
+    border: 2px solid;
+    padding: 10px;
+    }
 
-        table{
-        font-size: 20px;
-        margin-left: auto;
-        margin-right: auto;
-        }
+    table{
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    }
 
-        h2{
-        text-align: center;
-        }
+    h2{
+    text-align: center;
+    }
 
-        #statistics {
-        margin-left: 60px;
-        width: 1360px;
-        height: 200px;
-        padding-top: 5px;
-        }
+    #statistics {
+    margin-left: 60px;
+    width: 1360px;
+    height: 200px;
+    padding-top: 5px;
+    }
 
-        input {
-        margin-bottom: 10px; padding: 3px 3px; width: 280px;
-        border: 2px solid #CCCCCC;
-        }
+    input {
+    margin-bottom: 10px; padding: 3px 3px; width: 280px;
+    border: 2px solid #CCCCCC;
+    }
 
 
-    </style>
+</style>
 </head>
 
 <body>
@@ -270,7 +270,6 @@ function createCanvas(name, cells) {
   var beginTime = Math.round(new Date().getTime() / 1000);
   var dataNum = 30;
   var pollIntervalMs = 1000;
-  var tableID = "";
   var monitoredMbeans = [
     {name: "kmf.services:type=produce-metrics,name=*", attribute: "produce-availability-avg"},
     {name: "kmf.services:type=produce-metrics,name=*", attribute: "records-produced-rate"},
