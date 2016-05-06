@@ -73,13 +73,6 @@
       text-align: center;
     }
 
-    #statistics {
-      margin-left: 60px;
-      width: 1360px;
-      height: 200px;
-      padding-top: 5px;
-    }
-
     input {
       margin-bottom: 10px; padding: 3px 3px; width: 280px;
       border: 2px solid #CCCCCC;
@@ -100,7 +93,7 @@
 
 
     <div id="tab1">
-      <div style="margin-left:30px">
+      <div style="margin-left:30px" >
         <tr><h3>Search <input type="text" id="search1" placeholder="Type to search"></h3></tr>
         <table id="table" width="100%" align="center"></table>
       </div>
@@ -114,12 +107,45 @@
 
 
 <script>
-
   function GenerateTable(mbeans) {
-    //Build an array containing records.
-    var records = new Array();
-    var i = 1;
-    records.push(["Metric Name", "Statistics"]);
+    var cells = [];
+    cells.push(["Metric Name", "Statistics"]);
+
+    var table = document.createElement("table");
+    var columnCount = cells[0].length;
+
+    var row = table.insertRow(-1);
+    for (var i = 0; i < columnCount; i++) {
+      var headerCell = document.createElement("th");
+      headerCell.style.width = '300px';
+      headerCell.innerHTML = cells[0][i];
+      row.appendChild(headerCell);
+    }
+
+    $(mbeans).each(function (idx, mbean) {
+      row = table.insertRow(-1);
+      row.id = "data" + mbean.attribute;
+      for (var j = 0; j < columnCount; j++) {
+        var cell = row.insertCell(-1);
+        cell.style.backgroundColor = "#E0E0E0";
+        if (j == 0) {
+          cell.innerHTML = mbean.attribute;
+        } else {
+          cell.innerHTML = "0";
+        }
+      }
+    });
+
+    var dvTable = document.getElementById("dvTable");
+    dvTable.innerHTML = "";
+    $(document).ready(function () {
+      $('#dvTable').DataTable();
+    });
+    dvTable.appendChild(table);
+
+  }
+
+  function pullAndUpdateTable(mbeans){
     var requests = $.map(mbeans, function (mbean) {
       return {
         type: "read",
@@ -133,50 +159,15 @@
       var label = response.timestamp - beginTime;
       var attribute = response.request.attribute;
       $.each(response.value, function (mbean, values) {
-        var id = i;
-        var atr = attribute;
         var val = [values[attribute]][0];
+        var row = document.getElementById("data" + attribute);
         if(val && val.toString().length > 4) {
-          records.push([atr, val.toString().substring(0,4)]);
+          row.cells[1].innerHTML = val.toString().substring(0,4);
         } else {
-          records.push([atr, val]);
+          row.cells[1].innerHTML = val.toString();
         }
-        i++;
       });
     });
-
-    //Create a HTML Table element.
-    var table = document.createElement("table");
-
-    //Get the count of columns.
-    var columnCount = records[0].length;
-
-    //Add the header row.
-    var row = table.insertRow(-1);
-    for (var i = 0; i < columnCount; i++) {
-      var headerCell = document.createElement("th");
-      headerCell.style.width = '300px';
-      headerCell.innerHTML = records[0][i];
-      row.appendChild(headerCell);
-    }
-
-    //Add the data rows.
-    for (var i = 1; i < records.length; i++) {
-      row = table.insertRow(-1);
-      for (var j = 0; j < columnCount; j++) {
-        var cell = row.insertCell(-1);
-        cell.style.backgroundColor = "#E0E0E0";
-        cell.innerHTML = records[i][j];
-      }
-    }
-
-    var dvTable = document.getElementById("dvTable");
-    dvTable.innerHTML = "";
-    $(document).ready(function () {
-      $('#dvTable').DataTable();
-    });
-
-    dvTable.appendChild(table);
   }
 
   function createCanvas(name, cells) {
@@ -211,6 +202,7 @@
     svg.appendChild(text);
     return canvas
   }
+
   function getDefaultLine() {
     var startingLabel = [];
     var startingData = [];
@@ -228,6 +220,7 @@
         data: startingData}]
     }
   }
+
   function createCharts(mbeans) {
     var charts = {};
     var cells = [];
@@ -293,10 +286,14 @@
   var j4p = new Jolokia({url: "http://" + ip + ":8778/jolokia"});
   var monitoredCharts = createCharts(monitoredMbeans);
 
+  GenerateTable(monitoredMbeans);
+
   setInterval(function () {
     pollAndUpdateCharts(monitoredMbeans, monitoredCharts);
-    GenerateTable(monitoredMbeans);
+    pullAndUpdateTable(monitoredMbeans)
   }, pollIntervalMs);
+
+
 
 </script>
 </html>
